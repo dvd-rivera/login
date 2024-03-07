@@ -1,5 +1,5 @@
 import React from 'react';
-import { SocialButton } from './socialButton';
+import { SocialButton } from './SocialButton';
 import { Alert } from 'react-bootstrap';
 import { Formulario } from './formulario';
 
@@ -23,7 +23,7 @@ const Registro: React.FC = () => {
           icon={media.icon}
         />
       ))}
-      <Formulario/>
+      <Formulario />
       <Alert/>
     </>
   );
