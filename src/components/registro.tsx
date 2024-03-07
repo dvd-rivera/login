@@ -1,18 +1,18 @@
-import React from 'react'
-import { SocialButton } from './socialButton'
+import React from 'react';
+import { SocialButton } from './socialButton';
 
-interface socialMedia {
+interface SocialMedia {
   nombre: string;
   icon: string;
 }
 
-const socialMedia = [
+const socialMedia: SocialMedia[] = [
   { nombre: 'facebook', icon: 'fa-brands fa-facebook' },
   { nombre: 'github', icon: 'fa-brands fa-github' },
   { nombre: 'linkedin', icon: 'fa-brands fa-linkedin-in' },
-]
+];
 
-export const Registro = () => {
+const Registro: React.FC = () => {
   return (
     <>
       {socialMedia.map((media, index) => (
@@ -22,5 +22,7 @@ export const Registro = () => {
         />
       ))}
     </>
-  )
-}
+  );
+};
+
+export default Registro;
