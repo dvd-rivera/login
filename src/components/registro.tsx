@@ -1,5 +1,7 @@
 import React from 'react';
 import { SocialButton } from './socialButton';
+import { Alert } from 'react-bootstrap';
+import { Formulario } from './formulario';
 
 interface SocialMedia {
   nombre: string;
@@ -21,6 +23,8 @@ const Registro: React.FC = () => {
           icon={media.icon}
         />
       ))}
+      <Formulario/>
+      <Alert/>
     </>
   );
 };
