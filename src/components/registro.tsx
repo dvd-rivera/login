@@ -1,7 +1,7 @@
 import React from 'react';
 import { SocialButton } from './SocialButton';
 import { Alert } from 'react-bootstrap';
-import { Formulario } from './formulario';
+import { Formulario } from './Formulario';
 
 interface SocialMedia {
   nombre: string;
