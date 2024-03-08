@@ -2,6 +2,9 @@ import React from 'react';
 import { SocialButton } from './SocialButton';
 import { Alert } from 'react-bootstrap';
 import { Formulario } from './Formulario';
+import { Card } from 'react-bootstrap';
+
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 interface SocialMedia {
   nombre: string;
@@ -17,14 +20,22 @@ const socialMedia: SocialMedia[] = [
 const Registro: React.FC = () => {
   return (
     <>
-      {socialMedia.map((media, index) => (
-        <SocialButton
-          key={index}
-          icon={media.icon}
-        />
-      ))}
-      <Formulario />
-      <Alert/>
+      <Card>
+        <Card.Body>
+          <Card.Title className='text-center fw-bold'>Crea una cuenta</Card.Title>
+          <div className="row my-3 mx-auto">
+            {socialMedia.map((media) => (
+              <div key={media.nombre} className="col d-flex justify-content-center">
+                <SocialButton
+                  icon={media.icon}
+                />
+              </div>
+            ))}
+          </div>
+          <Formulario />
+          <Alert />
+        </Card.Body>
+      </Card>
     </>
   );
 };
