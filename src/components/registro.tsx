@@ -1,7 +1,7 @@
 import React from 'react';
-import { SocialButton } from './SocialButton';
-import { Alert } from 'react-bootstrap';
-import { Formulario } from './Formulario';
+import { SocialButton } from './socialButton';
+import { MyAlert } from './alert';
+import { Formulario } from './formulario';
 import { Card } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -9,6 +9,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 interface SocialMedia {
   nombre: string;
   icon: string;
+}
+
+interface alertProps {
+  name: string
+  email: string
+  password: string
+}
+
+const dataAlert: alertProps = {
+  name: "string",
+  email: "string",
+  password: "string"
 }
 
 const socialMedia: SocialMedia[] = [
@@ -33,7 +45,7 @@ const Registro: React.FC = () => {
             ))}
           </div>
           <Formulario />
-          <Alert />
+          <MyAlert name="hola" email={''} password={''} />
         </Card.Body>
       </Card>
     </>

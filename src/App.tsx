@@ -1,5 +1,5 @@
 import './App.css'
-import Registro from './components/Registro'
+import Registro from './components/registro'
 
 function App() {
 
