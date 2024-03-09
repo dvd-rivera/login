@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Form, InputGroup, Button } from 'react-bootstrap';
 
+import { MyAlert } from './alert';
+
+
 export const Formulario: React.FC = () => {
 	const [validated, setValidated] = useState(false);
 	const [formData, setFormData] = useState({
@@ -9,6 +12,8 @@ export const Formulario: React.FC = () => {
 		password: "",
 		rePassword: ""
 	});
+
+	const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
 	const handleChange = (fieldName: string, value: string) => {
 		setFormData({ ...formData, [fieldName]: value });
@@ -19,13 +24,13 @@ export const Formulario: React.FC = () => {
 
 		console.log("validando")
 		const form = event.currentTarget;
-		if (form.checkValidity() === false) {
+		if (form.checkValidity() === false || formData.nombre === '' || formData.email === '' || formData.password === '' || formData.rePassword === '' ) {
 			event.stopPropagation();
-			console.log("Ingresa los datos correctamente");
-		} else if (formData.password !== formData.rePassword) {
-			console.log("las constraseñas no son iguales")
+			setAlertMessage('Todos los campos son obligatorios');
+		}else if (formData.password !== formData.rePassword) {
+			setAlertMessage('Las contraseñas no coinciden');
 		}else {
-			console.log("Las contraseñas coinciden");
+			setAlertMessage('Las contraseñas coinciden');
 		}
 
 		setValidated(true);
@@ -59,6 +64,7 @@ export const Formulario: React.FC = () => {
 						Crear cuenta
 					</Button>
 				</div>
+				{validated && <MyAlert message={alertMessage} />}
 			</Form>
 		</div>
 	);
