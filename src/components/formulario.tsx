@@ -1,14 +1,18 @@
-import React, { EventHandler } from 'react';
-import { useState } from 'react'
-import { Form, InputGroup } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
+import React, { useState } from 'react'
+import { Form, InputGroup, Button } from 'react-bootstrap';
 
 export const Formulario: React.FC = () => {
-	const [nombre, setNombre] = useState("")
-	const [email, setEmail] = useState("")
-	const [password, setPassword] = useState("")
-	const [rePassword, setRePassword] = useState("")
 	const [validated, setValidated] = useState(false);
+	const [formData, setFormData] = useState({
+		nombre: "",
+		email: "",
+		password: "",
+		rePassword: ""
+	});
+
+	const handleChange = (fieldName: string, value: string) => {
+		setFormData({ ...formData, [fieldName]: value });
+	};
 
 	const handleSubmit = (event: any) => {
 		event.preventDefault();
@@ -17,54 +21,41 @@ export const Formulario: React.FC = () => {
 		const form = event.currentTarget;
 		if (form.checkValidity() === false) {
 			event.stopPropagation();
-
-		} else if (password != rePassword) {
+			console.log("Ingresa los datos correctamente");
+		} else if (formData.password !== formData.rePassword) {
 			console.log("las constraseñas no son iguales")
-		} 
+		}else {
+			console.log("Las contraseñas coinciden");
+		}
 
 		setValidated(true);
 	};
 
+	const formFields = [
+		{ name: "nombre", placeholder: "Nombre", type: "text" },
+		{ name: "email", placeholder: "tuemail@ejemplo.com", type: "email" },
+		{ name: "password", placeholder: "Contraseña", type: "password" },
+		{ name: "rePassword", placeholder: "Confirma tu contraseña", type: "password" }
+	];
+
 	return (
 		<div className="Formulario-container">
 			<Form noValidate validated={validated} onSubmit={handleSubmit}>
-				<InputGroup className="mb-3">
-					<Form.Control
-						placeholder="Nombre"
-						name='Nombre'
-						onChange={(e) => setNombre(e.target.value)}
-						required
-					/>
-				</InputGroup>
-				<InputGroup className="mb-3">
-					<Form.Control
-						placeholder="tuemail@ejemplo.com"
-						name='E-mail'
-						onChange={(e) => setEmail(e.target.value)}
-						type='email'
-						required
-					/>
-				</InputGroup>
-				<InputGroup className="mb-3">
-					<Form.Control
-						placeholder="Contraseña"
-						name='Nombre'
-						onChange={(e) => setPassword(e.target.value)}
-						required
-						type='password'
-					/>
-				</InputGroup>
-				<InputGroup className="mb-3">
-					<Form.Control
-						placeholder="Confirma tu contraseña"
-						name='Nombre'
-						onChange={(e) => setRePassword(e.target.value)}
-						type='password'
-						required
-					/>
-				</InputGroup>
+
+				{formFields.map((field) => (
+					<InputGroup className="mb-3" key={field.name}>
+						<Form.Control
+							placeholder={field.placeholder}
+							name={field.name}
+							onChange={(e) => handleChange(field.name, e.target.value)}
+							type={field.type}
+							required
+						/>
+						{/* <p>{field.name}: {formData[field.name]}</p> */}
+					</InputGroup>
+				))}
 				<div className="d-grid gap-2">
-					<Button type="submit" variant="primary" size="sm" className='my-2'>
+					<Button type="submit" variant="primary" size="sm" className="my-2">
 						Crear cuenta
 					</Button>
 				</div>

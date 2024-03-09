@@ -1,5 +1,5 @@
 import React from 'react';
-import { SocialButton } from './socialButton';
+import { SocialButton } from './SocialButton';
 import { MyAlert } from './alert';
 import { Formulario } from './formulario';
 import { Card } from 'react-bootstrap';
