@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SocialButton } from './socialButton';
+import { SocialButton } from './SocialButton';
 import { Formulario } from './formulario';
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
