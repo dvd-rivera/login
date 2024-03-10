@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Form, InputGroup, Button } from 'react-bootstrap';
 
-import { MyAlert } from './alert';
+interface HijoProps {
+	formValidatedValue: (valor: boolean) => void;
+	alertMessageProps: (valor: string | null) => void;
+  }
 
-
-export const Formulario: React.FC = () => {
-	const [validated, setValidated] = useState(false);
+export const Formulario: React.FC<HijoProps> = ({formValidatedValue,alertMessageProps}) => {
 	const [formData, setFormData] = useState({
 		nombre: "",
 		email: "",
@@ -13,7 +14,7 @@ export const Formulario: React.FC = () => {
 		rePassword: ""
 	});
 
-	const [alertMessage, setAlertMessage] = useState<string | null>(null);
+	const [validated, setValidated] = useState(false);
 
 	const handleChange = (fieldName: string, value: string) => {
 		setFormData({ ...formData, [fieldName]: value });
@@ -21,20 +22,19 @@ export const Formulario: React.FC = () => {
 
 	const handleSubmit = (event: any) => {
 		event.preventDefault();
-
 		console.log("validando")
 		const form = event.currentTarget;
 		if (form.checkValidity() === false || formData.nombre === '' || formData.email === '' || formData.password === '' || formData.rePassword === '' ) {
-			event.stopPropagation();
-			setAlertMessage('Todos los campos son obligatorios');
-		}else if (formData.password !== formData.rePassword) {
-			setAlertMessage('Las contraseñas no coinciden');
-		}else {
-			setAlertMessage('Las contraseñas coinciden');
+		  event.stopPropagation();
+		  alertMessageProps('Todos los campos son obligatorios');
+		} else if (formData.password !== formData.rePassword) {
+			alertMessageProps('Las contraseñas no coinciden');
+		} else {
+			alertMessageProps('Se ha creado exitosamente su cuenta');
 		}
-
-		setValidated(true);
-	};
+		formValidatedValue(true)
+		setValidated(true)
+	  };
 
 	const formFields = [
 		{ name: "nombre", placeholder: "Nombre", type: "text" },
@@ -46,7 +46,6 @@ export const Formulario: React.FC = () => {
 	return (
 		<div className="Formulario-container">
 			<Form noValidate validated={validated} onSubmit={handleSubmit}>
-
 				{formFields.map((field) => (
 					<InputGroup className="mb-3" key={field.name}>
 						<Form.Control
@@ -64,7 +63,6 @@ export const Formulario: React.FC = () => {
 						Crear cuenta
 					</Button>
 				</div>
-				{validated && <MyAlert message={alertMessage} />}
 			</Form>
 		</div>
 	);

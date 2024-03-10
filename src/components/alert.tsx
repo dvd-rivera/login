@@ -10,7 +10,7 @@ export const MyAlert: React.FC<MyAlertProps> = ({ message }) => {
   return (
     <>
       <div>
-        <Alert variant={message === 'Las contraseñas coinciden' ? 'success' : 'danger'}>
+        <Alert variant={message === 'Se ha creado exitosamente su cuenta' ? 'success' : 'danger'}>
             <div className="alert-message">
               {message}
             </div>

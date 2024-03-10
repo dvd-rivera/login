@@ -1,9 +1,9 @@
-import React from 'react';
-import { SocialButton } from './SocialButton';
+import React, { useState } from 'react'
+import { SocialButton } from './socialButton';
 import { Formulario } from './formulario';
 import { Card } from 'react-bootstrap';
-
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { MyAlert } from './alert';
 
 interface SocialMedia {
   nombre: string;
@@ -17,6 +17,17 @@ const socialMedia: SocialMedia[] = [
 ];
 
 const Registro: React.FC = () => {
+  
+  const [validated, setValidated] = useState(false);
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  
+  const formValidatedValue = (valor: boolean) => {
+    setValidated(valor);
+  };
+  
+  const alertMessageProps = (message:string | null) => {
+    setAlertMessage(message)
+  }
   return (
     <>
       <Card>
@@ -31,7 +42,8 @@ const Registro: React.FC = () => {
               </div>
             ))}
           </div>
-          <Formulario />
+          <Formulario formValidatedValue={formValidatedValue} alertMessageProps={alertMessageProps}/>
+          {validated && <MyAlert message={alertMessage} />}
         </Card.Body>
       </Card>
     </>
